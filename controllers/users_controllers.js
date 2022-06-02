@@ -62,3 +62,13 @@ module.exports.createSession = function(req, res){
     // user is signed in - we just need to redirect
     return res.redirect('/');
 }
+
+module.exports.destroySession = function(req, res){
+    // built in function in passport js to logout user
+    req.logout(function(err){
+        if(err){
+            return next(err);
+        }
+    });
+    return res.redirect('/');
+}

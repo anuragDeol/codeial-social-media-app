@@ -18,4 +18,6 @@ router.post('/create-session', passport.authenticate(
     {failureRedirect: '/users/sign-in'} // if authentication fails, flow goes to 'failureRedirect'
 ), usersController.createSession);  // else flow goes to 'createSession' action in 'usersController'
 
+router.get('/sign-out', usersController.destroySession);
+
 module.exports = router;

@@ -14,10 +14,10 @@ const sassMiddleware = require('node-sass-middleware');
 
 // set up before server starts
 app.use(sassMiddleware({
-    src: '/assets/scss',
-    dest: '/assets/css',
+    src: './assets/scss',   // our middleware will pick scss files from here to convert them into css
+    dest: './assets/css',
     debug: true,
-    outputStyle: 'extended',
+    outputStyle: 'extended',    // we want our code in multiple lines
     prefix: '/css'  // where should my server lookout for css files
 }));
 

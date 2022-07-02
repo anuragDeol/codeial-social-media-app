@@ -16,7 +16,7 @@ module.exports.create = function(req, res){
                 post: req.body.post
             }, function(err, comment){
                 // error handling
-                if(err){`${err}: unexpected error occured while commenting`};
+                if(err){ console.log(`${err}: unexpected error occured while commenting`); }
 
                 // adding comment id to the post
                 post.comments.push(comment);    // mongodb finds the id of the 'comment' document which is taajaa taajaa created and pushes in the array

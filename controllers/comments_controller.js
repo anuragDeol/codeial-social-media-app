@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const { post } = require('../routes');
 
 
 module.exports.create = function(req, res){
@@ -30,19 +31,23 @@ module.exports.create = function(req, res){
 
 module.exports.destroy = function(req, res){
     Comment.findById(req.params.id, function(err, comment){
-        if(comment.user == req.user.id){
-            // before deleting comment, we need to fetch the id of the post to which this comment belongs to so that we can delete this comment from that post
-            
-            let postId = comment.post;
+        let postId = comment.post;
+        Post.findById(postId, function(err, post){
+            if(comment.user == req.user.id || req.user.id == post.user){
+                // before deleting comment, we need to fetch the id of the post to which this comment belongs to so that we can delete this comment from that post
+                
+                // let postId = comment.post;
 
-            comment.remove();
+                comment.remove();
 
-            Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}}, function(err, post){
+                Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}}, function(err, post){
+                    return res.redirect('back');
+                });
+            }
+            else{
                 return res.redirect('back');
-            });
-        }
-        else{
-            return res.redirect('back');
-        }
+            }
+        });
+
     });
 }

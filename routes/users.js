@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const usersController = require('../controllers/users_controllers');
 
-router.get('/profile', passport.checkAuthentication, usersController.profile);  // we will only be able to access profile page if the user is signed in
+router.get('/profile/:id', passport.checkAuthentication, usersController.profile);  // we will only be able to access profile page if the user is signed in
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
 

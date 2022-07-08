@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 
+// no change made to this controller's actions (code not converted to async await) because there is no nesting of callbacks/ callback hell
 module.exports.profile = function(req, res){
     User.findById(req.params.id, function(err, user){
 

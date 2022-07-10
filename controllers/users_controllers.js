@@ -80,17 +80,21 @@ module.exports.create = function(req, res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
+    req.flash('success', 'Logged in successfully');
+
     // user is signed in - we just need to redirect
     return res.redirect('/');
 }
 
-module.exports.destroySession = function(req, res){
+module.exports.destroySession = async function(req, res){
+    
     // built in function in passport js to logout user
     req.logout(function(err){
         if(err){
             return next(err);
         }
+        req.flash('success', 'You have logged out!');
+        return res.redirect('/');
     });
-    return res.redirect('/');
 }
 

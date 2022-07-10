@@ -11,6 +11,8 @@ const passportLocal = require('./config/passport-local-strategy');
 // (OUTDATED SYNTAX) const MongoStore = require('connect-mongo')(session);   // session is passed as arguement
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
 
 // set up before server starts
 app.use(sassMiddleware({
@@ -63,6 +65,9 @@ app.use(passport.initialize());
 app.use(passport.session());    // passport also helps in maintaining sessions
 
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());   // flash uses session cookies - flash msgs will setup in the cookie which stores session info
+app.use(customMware.setFlash);
 
 // use express router
 app.use('/', require('./routes'));      // middleware

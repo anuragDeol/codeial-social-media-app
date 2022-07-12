@@ -17,7 +17,7 @@ router.post('/create', usersController.create);
 // it takes 3 arguements - 2nd arguement is middleware
 router.post('/create-session', passport.authenticate(
     'local',
-    {failureRedirect: '/users/sign-in'} // if authentication fails, flow goes to 'failureRedirect'
+    {failureRedirect: '/users/sign-in'} // if authentication fails, flow goes to the path specified in 'failureRedirect'
 ), usersController.createSession);  // else flow goes to 'createSession' action in 'usersController'
 
 router.get('/sign-out', usersController.destroySession);

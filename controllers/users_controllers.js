@@ -20,9 +20,11 @@ module.exports.update = function(req, res){
             name: req.body.name,
             email: req.body.email
         }, function(err, user){
+            req.flash('success', 'Your information is successfully updated !');
             return res.redirect('back');
         });
     }else{
+        req.flash('error', 'Unable to update your information');
         return res.status(401).send('Unauthorized');
     }
 }
@@ -80,20 +82,20 @@ module.exports.create = function(req, res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
-    req.flash('success', 'Logged in successfully');
+    req.flash('success', 'Logged in successfully!');
 
     // user is signed in - we just need to redirect
     return res.redirect('/');
 }
 
-module.exports.destroySession = async function(req, res){
+module.exports.destroySession = function(req, res){
     
     // built in function in passport js to logout user
     req.logout(function(err){
         if(err){
             return next(err);
         }
-        req.flash('success', 'You have logged out!');
+        req.flash('success', 'You have been logged out!');
         return res.redirect('/');
     });
 }

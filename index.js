@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
-const port = 8800;
+const port = 8000;
 const expressLayouts = require('express-ejs-layouts');      // require built-in ejs layouts library
 const db = require('./config/mongoose');
 // used for session-cookie

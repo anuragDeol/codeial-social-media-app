@@ -19,10 +19,11 @@ module.exports.create = async function(req, res){
             post.comments.push(comment);    // mongodb finds the id of the 'comment' document which is taajaa taajaa created and pushes in the array
             post.save();    // to save comment id in the database
 
+            req.flash('success', 'Comment added successfully');
             res.redirect('/');
         }
     }catch(err){
-        console.log(`${err}: unexpected error occured while commenting`);
+        req.flash('error', `${err}: unexpected error occured while commenting`);
         return;
     }
 }
@@ -30,19 +31,24 @@ module.exports.create = async function(req, res){
 module.exports.destroy = async function(req, res){
     try{
         let comment = await Comment.findById(req.params.id);
+
         let postId = comment.post;   // before deleting comment, we need to fetch the id of the post to which this comment belongs to so that we can delete this comment from that post
         let post = await Post.findById(postId);
 
         if(comment.user == req.user.id || req.user.id == post.user){
+
             comment.remove();
 
             await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
+
+            req.flash('success', 'Comment deleted');
             return res.redirect('back');
         }else{
+            req.flash('error', 'You are not authorized to delete this comment');
             return res.redirect('back');
         }
     }catch(err){
-        console.log(`${err} error while deleting the comment`);
+        req.flash('error', `${err} error while deleting the comment`);
         return;
     }
 }

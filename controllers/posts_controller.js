@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const { setFlash } = require('../config/middleware');
 
 module.exports.create = async function(req, res){
     try{
@@ -13,6 +14,7 @@ module.exports.create = async function(req, res){
         // type of AJAX request is XMLHttpRequest(xhr)
         if(req.xhr){
             // return some JSON
+            req.flash('success', 'Post published!');
             return res.status(200).json({
                 data: {
                     post: post
@@ -21,7 +23,6 @@ module.exports.create = async function(req, res){
             });
         }
 
-        req.flash('success', 'Post published!');
         return res.redirect('back');
     }catch(err){
         req.flash('error', err);

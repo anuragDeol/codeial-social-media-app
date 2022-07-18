@@ -20,6 +20,9 @@
                     let newPost = newPostDom(data.data.post);
                     // console.log(newPost);
                     $('#posts-list-container>ul').prepend(newPost);
+
+                    showNotification(data);
+
                     deletePost($(' .delete-post-button', newPost));     // newPost object has an <a> tag with 'delete-post-button' class in it
                 }, error: function(error){
                     console.log(error.responseText);
@@ -74,6 +77,9 @@
                 success: function(data){
                     // post deleted from db - now deleting post from DOM
                     $(`#post-${data.data.post_id}`).remove();
+
+                    showNotification(data);
+
                 }, error: function(error){
                     console.log(error.responseText);
                 }
@@ -82,5 +88,17 @@
     }
 
 
+    let showNotification = function(data){
+        console.log(data);
+        new Noty({
+            theme: 'semanticui',
+            text: `${ data.message }`,
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500,
+        }).show();
+    }
+
+    
     createPost();
 }

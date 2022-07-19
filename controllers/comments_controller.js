@@ -19,7 +19,18 @@ module.exports.create = async function(req, res){
             post.comments.push(comment);    // mongodb finds the id of the 'comment' document which is taajaa taajaa created and pushes in the array
             post.save();    // to save comment id in the database
 
-            req.flash('success', 'Comment added successfully');
+            if(req.xhr){
+                // return some JSON
+                req.flash('success', 'Comment added successfully');
+                req.flash('success', 'Comment posted!');
+                return res.status(200).json({
+                    data: {
+                        comment: comment
+                    },
+                    message: "Comment created!"
+                });
+            }
+
             res.redirect('/');
         }
     }catch(err){

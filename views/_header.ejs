@@ -5,6 +5,9 @@
     <ul>
         <div id="user-profile-div">
             <% if(locals.user) { %>
+                
+                <img src=<%= user.avatar %> alt=<%= user.name %> width="50">
+
                 <li>
                     <a href="/users/profile"><%= locals.user.name %></a></li>
                 <li>

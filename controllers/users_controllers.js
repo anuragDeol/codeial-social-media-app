@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 const Post = require('../models/post');
 
 // no change made to this controller's actions (code not converted to async await) because there is no nesting of callbacks/ callback hell
@@ -40,6 +42,15 @@ module.exports.update = async function(req, res){
                 user.email = req.body.email;
 
                 if(req.file){
+
+                    // if(user.avatar){
+                    //     // fs: filesystem
+                    //     // it unlinks the already existing file, and links the new uploaded one
+                    //     // But it may give error if there is no file present already - so this is not the best way to deal with this problem
+                    //     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    // }
+
+
                     // saving path of uploaded file into the avatar field in the new created 'user' document
                     user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
@@ -128,4 +139,3 @@ module.exports.destroySession = function(req, res){
         return res.redirect('/');
     });
 }
-

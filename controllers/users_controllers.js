@@ -1,7 +1,8 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 const Post = require('../models/post');
 
-// no change made to this controller's actions (code not converted to async await) because there is no nesting of callbacks/ callback hell
 module.exports.profile = function(req, res){
     User.findById(req.params.id, function(err, user){
 
@@ -14,17 +15,55 @@ module.exports.profile = function(req, res){
     });
 }
 
-module.exports.update = function(req, res){
+module.exports.update = async function(req, res){
+    // if(req.user.id == req.params.id){
+    //     User.findByIdAndUpdate(req.params.id, {
+    //         name: req.body.name,
+    //         email: req.body.email
+    //     }, function(err, user){
+    //         req.flash('success', 'Your information is successfully updated !');
+    //         return res.redirect('back');
+    //     });
+    // }else{
+    //     req.flash('error', 'Unable to update your information');
+    //     return res.status(401).send('Unauthorized');
+    // }
+
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, {
-            name: req.body.name,
-            email: req.body.email
-        }, function(err, user){
-            req.flash('success', 'Your information is successfully updated !');
+
+        try{
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req, res, function(err){
+                if(err){ console.log('*****Multer Error: ', err); }
+
+                // console.log(req.file);
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                if(req.file){
+
+                    if(user.avatar){
+                        // fs: filesystem
+                        // it unlinks the already existing file, and links the new uploaded one
+                        // But it may give error if there is no file present already - so this is not the best way to deal with this problem
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+
+
+                    // saving path of uploaded file into the avatar field in the new created 'user' document
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                return res.redirect('back');
+            });
+
+        }catch(err){
+            req.flash('error', err);
             return res.redirect('back');
-        });
+        }
+
     }else{
-        req.flash('error', 'Unable to update your information');
+        req.flash('error', 'Unauthorized!');
         return res.status(401).send('Unauthorized');
     }
 }
@@ -99,4 +138,3 @@ module.exports.destroySession = function(req, res){
         return res.redirect('/');
     });
 }
-

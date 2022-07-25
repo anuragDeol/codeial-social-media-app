@@ -32,7 +32,9 @@ module.exports.create = async function(req, res){
 
 module.exports.destroy = async function(req, res){
     try{
-        let post = await Post.findByIdAndDelete(req.params.id);
+        // let post = await Post.findByIdAndDelete(req.params.id);
+        let post = await Post.findById(req.params.id);
+
 
         if(post.user == req.user.id){
             post.remove();

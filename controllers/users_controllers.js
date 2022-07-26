@@ -42,12 +42,12 @@ module.exports.update = async function(req, res){
 
                 if(req.file){
 
-                    if(user.avatar){
-                        // fs: filesystem
-                        // it unlinks the already existing file, and links the new uploaded one
-                        // But it may give error if there is no file present already - so this is not the best way to deal with this problem
-                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                    }
+                    // if(user.avatar){
+                    //     // fs: filesystem
+                    //     // it unlinks the already existing file, and links the new uploaded one
+                    //     // But it may give error if there is no file present already - so this is not the best way to deal with this problem
+                    //     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    // }
 
 
                     // saving path of uploaded file into the avatar field in the new created 'user' document

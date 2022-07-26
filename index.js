@@ -8,6 +8,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
 // (OUTDATED SYNTAX) const MongoStore = require('connect-mongo')(session);   // session is passed as arguement
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');

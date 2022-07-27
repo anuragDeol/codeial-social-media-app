@@ -7,15 +7,16 @@ module.exports.createSession = async function(req, res){
 
         if(!user || user.password != req.body.password){
             return res.json(422, {
-                message: "Invalid username or password"
+                message: "Invalid email or password"
             });
         }
 
+        // authentication successful
         return res.json(200, {
             message: "Sign in successful, here is your token, please keep it safe",
             data: {
-                user: user.name,
-                token: jwt.sign(user.toJSON(), 'codeial', {expiresIn: '100000'})
+                username: user.name,
+                token: jwt.sign(user.toJSON(), 'codeial', {expiresIn: '100000'})    // token creation
             }
         });
     }catch(err){

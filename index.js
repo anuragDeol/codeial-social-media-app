@@ -9,6 +9,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT = require('./config/passport-jwt-strategy');
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
+
 // (OUTDATED SYNTAX) const MongoStore = require('connect-mongo')(session);   // session is passed as arguement
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');

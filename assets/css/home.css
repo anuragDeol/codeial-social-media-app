@@ -1,4 +1,5 @@
 #home-container {
+  background-color: palevioletred;
   display: flex;
   justify-content: center; }
   #home-container #feed-posts {
@@ -13,6 +14,8 @@
       flex-direction: column; }
     #home-container #feed-posts .post-comments {
       margin-left: 20%; }
+    #home-container #feed-posts #posts-list-container li {
+      border: 2px solid black; }
   #home-container #user-friends {
     border-left: 1px solid #b8b6b6;
     display: flex;
@@ -29,6 +32,16 @@
   #home-container #posts-list-container a {
     text-decoration: none;
     color: red; }
+  #home-container #posts-list-container #display-picture {
+    width: 40;
+    height: 40;
+    border-radius: 70%; }
+  #home-container #posts-list-container #dp-name-container {
+    display: flex;
+    align-items: center; }
 
 .font-family-sans-serif {
   font-family: sans-serif; }
+
+.font-family-Bahnschrift {
+  font-family: Bahnschrift; }

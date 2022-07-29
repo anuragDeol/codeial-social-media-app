@@ -1,15 +1,19 @@
 <li id="post-<%= post._id %>">
     <p>
-        <% if (locals.user && locals.user.id == post.user.id) { %>
-            <small>
-                <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"> <i class="fa-solid fa-ban"></i></a>
-            </small>
-        <% } %>
+        <div id="dp-name-container">
+            <% if (locals.user && locals.user.id == post.user.id) { %>
+                <small>
+                    <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"> <i class="fa-solid fa-ban"></i></a>
+                </small>
+                <img src='<%= user.avatar %>' alt='dp' id="display-picture">
+            <% } %>
 
-        <%= post.content %>
+            <span id="user-name" class="font-family-Bahnschrift"><%= post.user.name %></span>
+        </div>
+        
         <br>
         <small>
-            <%= post.user.name %>
+            <%= post.content %>
         </small>
     </p>
 

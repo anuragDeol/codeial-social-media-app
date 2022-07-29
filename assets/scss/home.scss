@@ -1,4 +1,6 @@
 #home-container{
+    background-color: palevioletred;
+
     display: flex;
     justify-content: center;
     #feed-posts{
@@ -12,12 +14,18 @@
         #new-post-form{
             display: flex;
             flex-direction: column;
-            input{
+            // input{
                 
-            }
+            // }
         }
         .post-comments{
             margin-left: 20%;
+        }
+
+        #posts-list-container{
+            li{
+                border: 2px solid black;
+            }
         }
         
     }
@@ -44,10 +52,23 @@
             text-decoration: none;
             color: red;
         }
+        #display-picture{
+            width: 40;
+            height: 40;
+            border-radius: 70%;
+        }
+        #dp-name-container{
+            display: flex;
+            align-items: center;
+        }
     }
 }
 
 
+// other styles
 .font-family-sans-serif{
     font-family: sans-serif;
+}
+.font-family-Bahnschrift{
+    font-family: Bahnschrift;
 }

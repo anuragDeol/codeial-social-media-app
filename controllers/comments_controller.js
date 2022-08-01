@@ -1,7 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
-const { post } = require('../routes');
-
+// const { post } = require('../routes');
+const commentsMailer = require('../mailers/comments_mailer');
 
 module.exports.create = async function(req, res){
     try{
@@ -18,6 +18,14 @@ module.exports.create = async function(req, res){
             // adding comment id to the post
             post.comments.push(comment);    // mongodb finds the id of the 'comment' document which is taajaa taajaa created and pushes in the array
             post.save();    // to save comment id in the database
+
+            // popoulate the 
+            try{
+                comment = await comment.populate('user', 'name email');
+                commentsMailer.newComment(comment);
+            }catch(err){
+                console.log('unable to populate the comment ', err);
+            }
 
             if(req.xhr){
                 // return some JSON

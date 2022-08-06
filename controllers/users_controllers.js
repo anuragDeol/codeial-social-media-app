@@ -2,6 +2,9 @@ const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 const Post = require('../models/post');
+const resetPassToken = require('../models/resetPassToken');
+const passportResetMailer = require('../mailers/password_reset_mailer');
+const { findById } = require('../models/user');
 
 module.exports.profile = function(req, res){
     User.findById(req.params.id, function(err, user){
@@ -127,6 +130,7 @@ module.exports.createSession = function(req, res){
     return res.redirect('/');
 }
 
+// sign out user
 module.exports.destroySession = function(req, res){
     
     // built in function in passport js to logout user
@@ -137,4 +141,87 @@ module.exports.destroySession = function(req, res){
         req.flash('success', 'You have been logged out!');
         return res.redirect('/');
     });
+}
+
+
+// initiate forgot password by asking user's email
+module.exports.forgotPassword = function(req, res){
+    return res.render('forgot_pass', {
+        title: "Enter the email."
+    });
+}
+
+// send mail to the user - to reset password
+module.exports.forgotPasswordUserVerification = async function(req, res){
+    try{
+        // 1. find user with email
+        let user = await User.findOne({email: req.body.email});
+        if(!user){ console.log('looks like the email you entered is incorrect'); return; }
+
+        // 2. create fogot password token document
+        let token = await resetPassToken.create({
+            user: user
+        });
+
+        // 3. send the token to the user via mail (mailer nodejs)
+        passportResetMailer.resetPass(token);
+
+        // ** NOTY can be used here **
+        return res.render('message', {
+            title: "Message!"
+        });
+
+    }catch(err){
+        console.log('couldnt change password', err);
+        res.redirect('/');
+    }
+
+}
+
+// user clicks the link shared via mail - ask user to enter new password
+module.exports.newPassword = async function(req, res){
+    try{
+        let token = await resetPassToken.findOne({accessToken : req.params.token});
+
+        // console.log("Line 181: token document found!!", token);
+        if(token.isValid){
+            return res.render('forgot_pass', {
+                title: "Enter your new password.",
+                token: token
+            });
+        }else{
+            console.log("Looks like the link has expired. Generate another one by clicking on FORGOT PASSWORD");
+        }
+    }catch(err){
+        console.log('You are not authorized to change password', err);
+    }
+    
+    return res.redirect('/');
+}
+
+// update user's new password
+module.exports.updatePassword = async function(req, res){
+    try{
+        let token = await resetPassToken.findOne({accessToken : req.params.token});
+        // change user password
+        if(req.body.password !== req.body.confirmPassword){
+            console.log('Password and Confirm Password do not match. Please enter again');
+            
+            return res.render('forgot_pass', {
+                title: "Enter new password",
+                token: token
+            });
+        }else{
+            // find the user
+            let user = await User.findById(token.user);
+            user.password = req.body.password;
+            user.save();
+            console.log("password changed successfully!");
+        }
+        token.isValid = false;  // user won't be able to change password with the same link again (link shared via mail)
+        token.save();
+    }catch(err){
+        console.log('error in updating password', err);
+    }
+    return res.redirect('/');
 }

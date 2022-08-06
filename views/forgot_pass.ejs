@@ -1,0 +1,14 @@
+<h2> <%= title %> </h2>
+
+<% if(locals.token) { %>
+    <form action="/users/update_password/<%= token.accessToken %>" method="POST">
+        <input type="password" name="password" placeholder="New Password">
+        <input type="password" name="confirmPassword" placeholder="Confirm New Password">
+        <input type="submit" value="Submit">
+    </form>
+<% } else{  %>
+    <form action="/users/forgot_password_user_verification" method="POST">
+        <input type="email" name='email' id='' placeholder="Enter your email">
+        <input type="submit" name='' id='' value="Submit">
+    </form>
+<% } %>

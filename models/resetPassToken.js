@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 const resetPassTokenSchema = new mongoose.Schema({
     user: {
@@ -7,8 +7,8 @@ const resetPassTokenSchema = new mongoose.Schema({
         ref: 'User'
     },
     accessToken: {
-        type: String,
-        default: crypto.randomBytes(20).toString('hex')
+        type: String
+        // default: crypto.randomBytes(20).toString('hex')
     },
     isValid: {
         type: Boolean,

@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const Post = require('../models/post');
 const resetPassToken = require('../models/resetPassToken');
-const passportResetMailer = require('../mailers/password_reset_mailer');
+const passwordResetMailer = require('../mailers/password_reset_mailer');
+const crypto = require('crypto');
 const { findById } = require('../models/user');
 
 module.exports.profile = function(req, res){
@@ -156,15 +157,16 @@ module.exports.forgotPasswordUserVerification = async function(req, res){
     try{
         // 1. find user with email
         let user = await User.findOne({email: req.body.email});
-        if(!user){ console.log('looks like the email you entered is incorrect'); return; }
+        if(!user){ console.log('looks like the email you entered is incorrect'); return res.redirect('back'); }
 
         // 2. create fogot password token document
         let token = await resetPassToken.create({
-            user: user
+            user: user,
+            accessToken: crypto.randomBytes(20).toString('hex')
         });
 
         // 3. send the token to the user via mail (mailer nodejs)
-        passportResetMailer.resetPass(token);
+        passwordResetMailer.resetPass(token);
 
         // ** NOTY can be used here **
         return res.render('message', {
@@ -183,17 +185,18 @@ module.exports.newPassword = async function(req, res){
     try{
         let token = await resetPassToken.findOne({accessToken : req.params.token});
 
-        // console.log("Line 181: token document found!!", token);
         if(token.isValid){
             return res.render('forgot_pass', {
                 title: "Enter your new password.",
                 token: token
             });
         }else{
-            console.log("Looks like the link has expired. Generate another one by clicking on FORGOT PASSWORD");
+            return res.render('forgot_pass', {
+                title: "The URL you clicked has already been used/ is expired. Please enter your email again to generate new URL."
+            });
         }
     }catch(err){
-        console.log('You are not authorized to change password', err);
+        console.log('error', err);
     }
     
     return res.redirect('/');
@@ -203,12 +206,13 @@ module.exports.newPassword = async function(req, res){
 module.exports.updatePassword = async function(req, res){
     try{
         let token = await resetPassToken.findOne({accessToken : req.params.token});
-        // change user password
+        // Change user password
+        // if password and confirmPassword do not match
         if(req.body.password !== req.body.confirmPassword){
             console.log('Password and Confirm Password do not match. Please enter again');
             
             return res.render('forgot_pass', {
-                title: "Enter new password",
+                title: "Please enter again. Password and Confirm Password do not match.",
                 token: token
             });
         }else{
@@ -216,6 +220,8 @@ module.exports.updatePassword = async function(req, res){
             let user = await User.findById(token.user);
             user.password = req.body.password;
             user.save();
+
+            // **NOTY can be used here**
             console.log("password changed successfully!");
         }
         token.isValid = false;  // user won't be able to change password with the same link again (link shared via mail)

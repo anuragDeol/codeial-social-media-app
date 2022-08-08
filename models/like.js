@@ -14,7 +14,7 @@ const likeSchema = new mongoose.Schema({
     onModel: {
         type: String,
         required: true,
-        enum: ['Post', 'Comment']   // enums tells only 'Post' and 'Comment' are the objects which can be liked
+        enum: ['Post', 'Comment']   // enums tells only 'Post' and 'Comment' can be liked
     }
 }, {
     timestamps: true

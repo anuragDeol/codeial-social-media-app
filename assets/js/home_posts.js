@@ -18,8 +18,10 @@
                     // console.log(data.data.post.content);
                     // console.log(data.message);
                     let newPost = newPostDom(data.data.post);
-                    // console.log(newPost);
+                    console.log(newPost);
                     $('#posts-list-container>ul').prepend(newPost);
+
+                    newPostForm[0].reset();
 
                     showNotification(data);
 
@@ -89,7 +91,7 @@
 
 
     let showNotification = function(data){
-        console.log(data);
+        // console.log(data);
         new Noty({
             theme: 'semanticui',
             text: `${ data.message }`,

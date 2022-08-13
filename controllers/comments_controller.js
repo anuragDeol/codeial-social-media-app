@@ -21,8 +21,9 @@ module.exports.create = async function(req, res){
 
             if(req.xhr){
                 // return some JSON
-                req.flash('success', 'Comment added successfully');
-                req.flash('success', 'Comment posted!');
+                // req.flash('success', 'Comment added successfully');
+                // req.flash('success', 'Comment posted!');
+                comment = await comment.populate('user', 'name');
                 return res.status(200).json({
                     data: {
                         comment: comment

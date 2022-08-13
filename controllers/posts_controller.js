@@ -14,7 +14,6 @@ module.exports.create = async function(req, res){
         // type of AJAX request is XMLHttpRequest(xhr)
         if(req.xhr){
             // return some JSON
-            req.flash('success', 'Post published!');
             return res.status(200).json({
                 data: {
                     post: post

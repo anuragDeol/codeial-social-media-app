@@ -26,7 +26,7 @@ let create = function(postId) {
                 // console.log(data.data.comment._id);
                 // alert('request sent');
                 let newComment = newCommentDom(postId, data.data.comment);
-                $(`#post-${postId} .post-comments-list>ul`).prepend(newComment);
+                $(`#post-${postId} .post-comments-list>ul`).append(newComment);
                 
                 newCommentForm[0].reset();
 

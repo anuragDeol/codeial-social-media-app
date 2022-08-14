@@ -19,14 +19,14 @@ let create = function(postId) {
             success: function(data){
                 // console.log(data.data.comment._id);
                 // alert('request sent');
-                let newComment = newCommentDom(postId, data.data.comment);
+                let newComment = newCommentDom(data.data.comment);
                 $(`#post-${postId} .post-comments-list>ul`).append(newComment);
                 
                 newCommentForm[0].reset();
 
                 showNotification(data);
 
-                deletePost($(' .delete-comment-button', newComment));
+                deleteComment($(' .delete-comment-button', newComment));
             }, error: function(error){
                 console.log(error.responseText);
             }
@@ -35,8 +35,8 @@ let create = function(postId) {
 }
 
 
-let newCommentDom = function(postId, comment){
-    return $(`<li id="post-${postId}-comment-${comment._id}">
+let newCommentDom = function(comment){
+    return $(`<li id="comment-${comment._id}">
         <p>
             <small>
                 <a class="delete-comment-button" href="/comments/destroy/${comment._id}"><i class="fa-solid fa-ban"></i></a>
@@ -51,7 +51,7 @@ let newCommentDom = function(postId, comment){
 }
 
 
-let deletePost  = function(deleteLink){
+let deleteComment  = function(deleteLink){
     $(deleteLink).click(function(e){
         e.preventDefault();
 
@@ -59,9 +59,9 @@ let deletePost  = function(deleteLink){
             type: 'get',
             url: $(deleteLink).prop('href'),    // syntax to get value of 'href' that is there in <a> tag
             success: function(data){
-                // post deleted from db - now deleting post from DOM
-                $(`#post-${data.data.post_id}`).remove();
-                $(`#post-${postId}-comment-${data.data.comment_id}`);
+                // 'data' contains the deleted comment document that has been deleted from the db and returned as a JSON response from the controller's action
+                // comment deleted from db - now deleting comment from DOM
+                $(`#comment-${data.data.comment_id}`).remove();
 
                 showNotification(data);
 
@@ -76,7 +76,7 @@ let showNotification = function(data){
     // console.log(data);
     new Noty({
         theme: 'semanticui',
-        text: `${ data.message }`,
+        text: `${data.message}`,
         type: 'success',
         layout: 'topRight',
         timeout: 1500,

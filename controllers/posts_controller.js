@@ -14,12 +14,11 @@ module.exports.create = async function(req, res){
         // type of AJAX request is XMLHttpRequest(xhr)
         if(req.xhr){
             // return some JSON
-            req.flash('success', 'Post published!');
             return res.status(200).json({
                 data: {
                     post: post
                 },
-                message: "Post created!"
+                message: "Success! Post published!"
             });
         }
 
@@ -46,12 +45,12 @@ module.exports.destroy = async function(req, res){
                     data: {
                         post_id: req.params.id
                     },
-                    message: "Post deleted !"
+                    message: "Success! Post Deleted"
                 });
             }
 
 
-            req.flash('success', 'Post and associated comments deleted');
+            // req.flash('success', 'Post and associated comments deleted');
             
             return res.redirect('back');
         }else{

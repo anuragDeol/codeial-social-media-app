@@ -28,5 +28,9 @@ router.get('/auth/google/callback', passport.authenticate(
     {failureRedirect: 'users/sign-in'}
 ), usersController.createSession);
 
+router.get('/forgot_password', usersController.forgotPassword);
+router.post('/forgot_password_user_verification', usersController.forgotPasswordUserVerification);
+router.post('/update_password/:token', usersController.updatePassword);
+router.get('/new_password/:token', usersController.newPassword);
 
 module.exports = router;

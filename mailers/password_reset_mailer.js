@@ -1,22 +1,17 @@
 const nodeMailer = require('../config/nodemailer');
 
-// // exporting module - method 1
-// module.exports.newComment = function(comment){
 
-// }
-
-// exporting module - method 2
-exports.newComment = (comment) => {
-    // console.log('inside newComment mailer');
+exports.resetPass = (token) => {
     let htmlString = nodeMailer.renderTemplate({
         // context
-        comment: comment
-    }, '/comments/new_comment.ejs');
+        token: token
+    }, '/users/reset_password.ejs');
+
 
     nodeMailer.transporter.sendMail({
         // from: 'codeial@gmail.com',   // the mail is sent from the email which is used to setup mailer in 'nodemailer.js' and is authorized by google
-        to: comment.user.email,     // receiver's (the user who commented) email id
-        subject: "New Comment Published",
+        to: token.user.email,     // receiver's (the user who commented) email id
+        subject: "Codeial - Change your password",
         html: htmlString
     }, (err, info) => {
         if(err){
@@ -24,7 +19,8 @@ exports.newComment = (comment) => {
             return;
         }
 
-        // console.log("Mail Delivered", info);
+        console.log("Mail Delivered", info);
         return;
     });
 }
+

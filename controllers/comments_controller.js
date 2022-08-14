@@ -31,7 +31,7 @@ module.exports.create = async function(req, res){
                         return;
                     }
 
-                    console.log('job enqueued: ', job.id);
+                    // console.log('job enqueued: ', job.id);
                 });
             }catch(err){
                 console.log('unable to populate the comment ', err);

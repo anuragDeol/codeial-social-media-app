@@ -2,7 +2,7 @@
     <p>
         <% if (locals.user && locals.user.id == post.user.id) { %>
             <small>
-                <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"><i class="fa-solid fa-ban"></i></a>
+                <a class="delete-post-button color-red" href="/posts/destroy/<%= post.id %>"><i class="fa-solid fa-ban"></i></a>
             </small>
         <% } %>
 
@@ -12,6 +12,16 @@
             <%= post.user.name %>
         </small>
     </p>
+    
+
+    <!-- // if the user is signed in - user can like/unlike the post -->
+    <% if (locals.user) { %>
+        <small>
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post" id="post-<%=post._id%>-like-button"> <%=post.likes.length%> Likes </a>
+        </small>
+    <% } else { %>
+            <%=post.likes.length%> Likes
+    <% } %>
 
     <div class="post-comments">
         <% if (locals.user) { %>
@@ -33,3 +43,4 @@
         </div>
     </div>
 </li>
+

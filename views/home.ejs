@@ -37,3 +37,12 @@
 </div>
 <script src='/js/home_comments.js'></script>
 <script src='/js/home_posts.js'></script>
+<script src='/js/toggle_likes.js'></script>
+
+
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;    // 'this' is the href of <a> tag with class 'toggle-like-button'
+        let toggleLike = new ToggleLike(self);  // create new instance/object of class 'ToggleLike'
+    });
+</script>

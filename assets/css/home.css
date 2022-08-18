@@ -27,8 +27,10 @@
     #home-container #user-friends a:hover {
       color: #3838a8; }
   #home-container #posts-list-container a {
-    text-decoration: none;
-    color: red; }
+    text-decoration: none; }
 
 .font-family-sans-serif {
   font-family: sans-serif; }
+
+.color-red {
+  color: red; }

@@ -1,4 +1,3 @@
-
 class ToggleLike {
     constructor(toggleElement) {
         // 'toggleElement' is the href of <a> tag, on which the user clicked

@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const Like = require('../models/like');
 // const { post } = require('../routes');
 const commentsMailer = require('../mailers/comments_mailer');
 const queue = require('../config/kue');
@@ -17,13 +18,15 @@ module.exports.create = async function(req, res){
                 post: req.body.post
             });
 
+            
             // adding comment id to the post
-            post.comments.push(comment);    // mongodb finds the id of the 'comment' document which is taajaa taajaa created and pushes in the array
+            post.comments.push(comment);    // mongodb finds the id of the 'comment' document which is newly created and pushes in the array
             post.save();    // to save comment id in the database
 
-            // popoulate the 
             try{
+                // populate the 'name' and 'email' field of 'user' in comment
                 comment = await comment.populate('user', 'name email');
+
                 // commentsMailer.newComment(comment);
                 let job = queue.create('emails', comment).save(function(err){
                     if(err){
@@ -34,7 +37,7 @@ module.exports.create = async function(req, res){
                     // console.log('job enqueued: ', job.id);
                 });
             }catch(err){
-                console.log('unable to populate the comment ', err);
+                console.log(err);
             }
 
             if(req.xhr){
@@ -66,6 +69,9 @@ module.exports.destroy = async function(req, res){
         let post = await Post.findById(postId);
 
         if(comment.user == req.user.id || req.user.id == post.user){
+
+            // delete all the likes associated with this comment
+            await Like.deleteMany({likeable: req.params.id, onModel: 'Comment'});
 
             comment.remove();
 

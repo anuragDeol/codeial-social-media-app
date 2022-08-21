@@ -2,7 +2,6 @@ let create = function(postId) {
     // console.log(postId);
 
     // let postContainer = $(`#post-${postId}`);
-    
     let newCommentForm = $(`#post-${postId}-comment-form`);
 
     newCommentForm.off().submit(function(e){    // *here the issue was that this event was being called 'i' times on ith consecutive click - solution found on stackoverflow - using '.off()' cancels all previous eventhandlers before calling the next one
@@ -22,11 +21,15 @@ let create = function(postId) {
                 let newComment = newCommentDom(data.data.comment);
                 $(`#post-${postId} .post-comments-list>ul`).append(newComment);
                 
+                deleteComment($(' .delete-comment-button', newComment));
+
+
+                // enable the functionality of the toggle like button on the new post
+                new ToggleLike($(' .toggle-like-button', newComment));
+                
                 newCommentForm[0].reset();
 
                 showNotification(data);
-
-                deleteComment($(' .delete-comment-button', newComment));
             }, error: function(error){
                 console.log(error.responseText);
             }
@@ -45,6 +48,10 @@ let newCommentDom = function(comment){
             <br>
             <small>
                 ${comment.user.name}
+            </small>
+
+            <small>
+                <a class="toggle-like-button" data-likes=0 href="/likes/toggle/?id=${comment._id}&type=Comment"> 0 Likes </a>
             </small>
         </p>
     </li>`);

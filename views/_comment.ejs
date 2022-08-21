@@ -5,10 +5,21 @@
                 <a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>"><i class="fa-solid fa-ban"></i></a>
             </small>
         <% } %>
+
         <%= comment.content %>
         <br>
         <small>
             <%= comment.user.name %>
         </small>
+
+
+        <!-- like the comment if the user is signed in -->
+        <% if (locals.user) { %>
+            <small>
+                <a class="toggle-like-button" data-likes="<%=comment.likes.length%>" href="/likes/toggle/?id=<%=comment._id%>&type=Comment"> <%=comment.likes.length%> Likes </a>
+            </small>
+        <% } else { %>
+            <%=comment.likes.length%> Likes
+        <% } %>
     </p>
 </li>

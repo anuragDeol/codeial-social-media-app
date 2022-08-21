@@ -7,19 +7,17 @@ class ToggleLike {
 
     toggleLike() {
         $(this.toggler).click(function(e) {
-            // console.log('clicked- ' + this);
             e.preventDefault();
             let self = this;    // 'self' is assigned the <a> tag on which the user clicked
-            console.log(self);
 
             // send request manually via AJAX
+            // promises
             $.ajax({
                 type: 'POST',
                 url: $(self).attr('href')   // this fetches the href of the <a> tag
             })
             .done(function(data) {
                 let likesCount = parseInt($(self).attr('data-likes'));
-                console.log(likesCount);
                 if(data.data.deleted == true){
                     // unlike the post - decrease likesCount
                     likesCount -= 1;

@@ -10,7 +10,7 @@ module.exports.create = async function(req, res){
             user: req.user._id
         });
         post = await post.populate('user');     // we will be able to fetch 'user.name'
-        
+
         // check if the request is AJAX req
         // type of AJAX request is XMLHttpRequest(xhr)
         if(req.xhr){

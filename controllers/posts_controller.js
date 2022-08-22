@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 const { setFlash } = require('../config/middleware');
 
 module.exports.create = async function(req, res){
@@ -9,7 +10,7 @@ module.exports.create = async function(req, res){
             user: req.user._id
         });
         post = await post.populate('user');     // we will be able to fetch 'user.name'
-        
+
         // check if the request is AJAX req
         // type of AJAX request is XMLHttpRequest(xhr)
         if(req.xhr){
@@ -36,6 +37,11 @@ module.exports.destroy = async function(req, res){
 
 
         if(post.user == req.user.id){
+
+            // delete the associated likes for the post and all its comments' likes too
+            await Like.deleteMany({likeable: post, onModel:'Post'});
+            await Like.deleteMany({_id: {$in: post.comments}});
+
             post.remove();
 
             await Comment.deleteMany({post: req.params.id});

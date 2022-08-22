@@ -17,7 +17,7 @@
     <!-- // if the user is signed in - user can like/unlike the post -->
     <% if (locals.user) { %>
         <small>
-            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post" id="post-<%=post._id%>-like-button"> <%=post.likes.length%> Likes </a>
+            <a class="toggle-like-button" data-likes="<%=post.likes.length%>" href="/likes/toggle/?id=<%=post._id%>&type=Post"> <%=post.likes.length%> Likes </a>
         </small>
     <% } else { %>
             <%=post.likes.length%> Likes

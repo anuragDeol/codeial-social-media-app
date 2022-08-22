@@ -13,7 +13,12 @@ module.exports.home = async function(req, res){
             populate: {
                 path: 'user'
             }
-        });
+            // below commented lines are causing error
+            // ,
+            // populate: {
+            //     path: 'likes'
+            // }
+        }).populate('likes');
 
         let users = await User.find({});
 

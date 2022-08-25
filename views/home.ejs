@@ -2,15 +2,18 @@
 
 <div id="home-container">
     <section id="feed-posts">
-        <h4>Posts</h4>
-        <% if(locals.user){ %>
-            <form action="/posts/create" id="new-post-form" method="POST">
-                <textarea name='content' cols='30' rows='3' placeholder='Type here...'  required></textarea>
-                <input type='submit' value="Post">
-            </form>
-        <% } %>
+        <!-- <h4 class="font-family-bahnschrift">What's in your mind !?</h4> -->
+        <div id="new-post-form-container">
+            <% if(locals.user){ %>
+                    <form action="/posts/create" id="new-post-form" method="POST">
+                        <textarea name='content' cols='50' rows='4' placeholder='Share a Post' id="textarea" required></textarea>
+                        <!-- <input type='text' name='content'  placeholder='Share a Post' required> -->
+                        <input type='submit' value="Post" id="new-post-form-btn" class="font-family-bahnschrift">
+                    </form>
+            <% } %>
+        </div>
         <div id="posts-list-container">
-            <ul class="font-family-sans-serif">
+            <ul>
                 <% for(post of posts) { %>
                     <%- include('_post') -%>
                 <% } %>
@@ -19,20 +22,34 @@
         </div>
     </section>
 
-    <section id="user-friends">
-        <h4 class="font-family-sans-serif">Friends</h4>
-        
-        <% for(u of all_users){ %>
-            <p>
-                <a href="/users/profile/<%= u.id %>">
-                    <%= u.name %>
-                    <%if(locals.user && locals.user.id == u.id) { %> 
-                        <small> (Me) </small>
-                    <% } %>
-                </a>
+    <section id="user-friends"  class="font-family-bahnschrift">
+        <% if(locals.user) { %>
+            <div id="user-profile">
+                <h1>Hello <%=locals.user.name%></h1>
                 
-            </p>
+                <% if(locals.user.avatar) { %>
+                    <img src=<%= user.avatar %> alt=<%= user.name %> width="50">
+                <% } else { %>
+                    <img src='https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg' alt=''>
+                <% } %>
+            </div>
         <% } %>
+        <div id=user-friends-list>
+            <h4>People on Codeial, so far</h4>
+            <% for(u of all_users){ %>
+                <p id="user-name">
+                    <a href="/users/profile/<%= u.id %>">
+                        <%= u.name %>
+                        <%if(locals.user && locals.user.id == u.id) { %> 
+                            <small> (Me) </small>
+                        <% } %>
+                    </a>
+                    
+                </p>
+            <% } %>
+        </div>
+
+        
     </section>
 
     <%- include('_chat_box') -%>

@@ -1,25 +1,38 @@
 <!-- This is a partial -->
 <header>
-    <span id="heading"><i class="fa-solid fa-code"></i><a href="/"> Codeial </a></span>
+    <span id="heading"><a href="/"><i class="fa-brands fa-square-pied-piper"></i> Codeial </a></span>
 
     <ul>
         <div id="user-profile-div">
-            <% if(locals.user) { %>
-                
-                <img src=<%= user.avatar %> alt=<%= user.name %> width="50">
+            
 
-                <li>
-                    <a href="/users/profile/<%= user.id %>"><%= locals.user.name %></a></li>
-                <li>
-                    <a href="/users/sign-out">Sign Out</a>
-                </li>
-            <% } else { %>
-                <li>
-                    <a href="/users/sign-in">Sign In</a>
-                </li>
-                <li>
-                    <a href="/users/sign-up">Sign Up</a>
-                </li>
+            <div id="header-elements">
+                <a href="/" class="zero-point-8-rem font-family-bahnschrift"><i class="fa-solid fa-house"></i></a>
+                
+                <% if(locals.user) { %>
+                    
+                    <!-- <img src=<%= user.avatar %> alt=<%= user.name %> width="50"> -->
+
+                    <li>
+                        <a href="/users/profile/<%= user.id %>" class="zero-point-8-rem font-family-bahnschrift"><%= locals.user.name %></a></li>
+                    <li>
+                        <a href="/users/sign-out" class="zero-point-8-rem font-family-bahnschrift">Sign Out</a>
+                    </li>
+                <% } else { %>
+                    <!-- <div id="navigation-div" class="zero-point-8-rem font-family-bahnschrift"> -->
+                        <!-- <a href="/" class="zero-point-8-rem font-family-bahnschrift"><i class="fa-solid fa-house"></i></a> -->
+                        <!-- <a href="/users/profile">Profile</a> -->
+                    <!-- </div> -->
+                    <li>
+                        <a href="/users/sign-in" class="zero-point-8-rem font-family-bahnschrift">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            Sign In</a>
+                    </li>
+                    <li>
+                        <a href="/users/sign-up" class="zero-point-8-rem font-family-bahnschrift">
+                        <i class="fa-solid fa-user-plus"></i>Sign Up</a>
+                    </li>
+                </div>
             <% } %>
         </div>
     </ul>

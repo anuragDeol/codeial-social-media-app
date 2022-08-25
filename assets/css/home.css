@@ -2,35 +2,145 @@
   display: flex;
   justify-content: center; }
   #home-container #feed-posts {
-    border-left: 0.5px solid black;
-    flex-grow: 0.5;
-    margin-left: 1%;
+    border-radius: 10px;
+    margin: 1%;
     display: flex;
     flex-direction: column;
     align-items: center; }
-    #home-container #feed-posts #new-post-form {
+    #home-container #feed-posts #new-post-form-container #new-post-form {
       display: flex;
       flex-direction: column; }
+      #home-container #feed-posts #new-post-form-container #new-post-form #textarea {
+        border: 1px solid #989898;
+        border-radius: 7px;
+        padding: 2%;
+        resize: none; }
+    #home-container #feed-posts #new-post-form-container #new-post-form-btn {
+      margin-top: 3%;
+      width: 20%;
+      align-self: center;
+      border: none;
+      border-radius: 5px;
+      transition: 0.2s;
+      padding: 2%; }
+    #home-container #feed-posts #new-post-form-container #new-post-form-btn:hover {
+      background-color: #757474;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s; }
     #home-container #feed-posts .post-comments {
-      margin-left: 20%; }
+      margin-left: 2%;
+      margin-right: 2%;
+      border-top: 1px solid #9b9b9b;
+      border-radius: 0;
+      padding-top: 2%; }
+      #home-container #feed-posts .post-comments .comment-input-form {
+        border: 1.5px solid #6f6f6f;
+        border-radius: 20px;
+        width: 80%;
+        padding: 1.5%; }
+      #home-container #feed-posts .post-comments .comment-btn {
+        border: none;
+        border-radius: 5px;
+        margin-left: 2%;
+        padding: 2%;
+        background-color: white;
+        transition: 0.2s; }
+      #home-container #feed-posts .post-comments .comment-btn:hover {
+        background-color: #dfdfdf;
+        cursor: pointer;
+        transition: 0.2s; }
+      #home-container #feed-posts .post-comments p {
+        margin-left: 0;
+        background-color: #f2f2f2;
+        padding: 2%;
+        border-radius: 0 10px 10px 10px; }
   #home-container #user-friends {
-    border-left: 1px solid #b8b6b6;
+    border-radius: 20px;
+    background-color: white;
+    margin: 1%;
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-grow: 0.2;
-    border-right: 0.5px solid black; }
+    height: fit-content;
+    padding-bottom: 2%; }
     #home-container #user-friends a {
       color: black;
+      text-decoration: none; }
+    #home-container #user-friends #user-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 1px solid gray;
+      padding-bottom: 10%; }
+      #home-container #user-friends #user-profile img {
+        border-radius: 100%;
+        width: 80px;
+        height: 80px; }
+    #home-container #user-friends #user-friends-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
+      #home-container #user-friends #user-friends-list #user-name {
+        padding: 5%;
+        background-color: white;
+        border-radius: 15px;
+        transition: 0.2s; }
+      #home-container #user-friends #user-friends-list #user-name:hover {
+        padding: 5%;
+        background-color: #7586a9;
+        border-radius: 15px;
+        transition: 0.2s; }
+      #home-container #user-friends #user-friends-list #user-name:hover a {
+        transition: 0.2s;
+        color: white; }
+  #home-container #posts-list-container {
+    width: 70%; }
+    #home-container #posts-list-container a {
       text-decoration: none;
-      font-family: sans-serif; }
-    #home-container #user-friends a:hover {
-      color: #3838a8; }
-  #home-container #posts-list-container a {
-    text-decoration: none; }
+      color: black;
+      transition: 0.1s; }
+    #home-container #posts-list-container a:hover {
+      color: #7586a9;
+      transition: 0.1s; }
+    #home-container #posts-list-container ul {
+      margin-left: -40px;
+      padding-bottom: 5%; }
+    #home-container #posts-list-container li {
+      background-color: white;
+      list-style: none;
+      border: 2px solid white;
+      border-radius: 15px 15px 15px 15px;
+      margin: 1%;
+      margin-top: 2%;
+      padding-left: 1%; }
+      #home-container #posts-list-container li li {
+        border: 0; }
+    #home-container #posts-list-container .post-delete-icon {
+      color: white;
+      transition: 0.3s; }
+    #home-container #posts-list-container .comment-delete-icon {
+      color: #f2f2f2;
+      transition: 0.3s; }
+  #home-container #posts-list-container li:hover .delete-icon {
+    color: red;
+    transition: 0.3s; }
 
 .font-family-sans-serif {
   font-family: sans-serif; }
 
+.font-family-bahnschrift {
+  font-family: bahnschrift; }
+
+.font-family-system-ui {
+  font-family: system-ui; }
+
 .color-red {
   color: red; }
+
+.font-size-zero-point-7-rem {
+  font-size: 0.7rem; }
+
+.font-size-1-point-2-rem {
+  font-size: 1.2rem; }

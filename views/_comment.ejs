@@ -1,25 +1,27 @@
 <li id="comment-<%=comment._id%>">
-    <p>
+    <p class="font-family-bahnschrift">
+
+        <%= comment.content %>
         <% if (locals.user && (locals.user.id == comment.user.id || locals.user.id == post.user.id)) { %>
             <small>
-                <a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>"><i class="fa-solid fa-ban"></i></a>
+                <a href="/comments/destroy/<%= comment.id %>"><i class="fa-solid fa-ban comment-delete-icon delete-icon"></i></a>
             </small>
         <% } %>
 
-        <%= comment.content %>
         <br>
-        <small>
+        <small class="font-family-system-ui font-size-zero-point-7-rem">
             <%= comment.user.name %>
         </small>
+        <br>
 
 
         <!-- like the comment if the user is signed in -->
-        <% if (locals.user) { %>
-            <small>
+        <small class="font-size-zero-point-7-rem font-family-sans-serif">
+            <% if (locals.user) { %>
                 <a class="toggle-like-button" data-likes="<%=comment.likes.length%>" href="/likes/toggle/?id=<%=comment._id%>&type=Comment"> <%=comment.likes.length%> Likes </a>
-            </small>
-        <% } else { %>
-            <%=comment.likes.length%> Likes
-        <% } %>
+            <% } else { %>
+                <%=comment.likes.length%> Likes
+            <% } %>
+        </small>
     </p>
 </li>

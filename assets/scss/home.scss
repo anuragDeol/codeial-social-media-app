@@ -80,7 +80,7 @@
     }
     #user-friends{
         // padding-left: 5.5%;
-        // border: 0.5px solid black;
+        border: 0.5px solid rgb(206, 206, 206);
         border-radius: 20px;
         background-color: white;
         margin: 1%;
@@ -140,7 +140,8 @@
             transition: 0.1s;
         }
         a:hover {
-            color: rgb(117,134,169);
+            // color: rgb(117,134,169);
+            color: rgb(239, 88, 88);
             transition: 0.1s;
         }
         ul {
@@ -152,7 +153,7 @@
             // background-color: rgb(151, 167, 200);
             background-color: white;
             list-style: none;
-            border: 2px solid white;
+            border: 1px solid rgb(206, 206, 206);
             border-radius: 15px 15px 15px 15px;
             margin: 1%;
             margin-top: 2%;

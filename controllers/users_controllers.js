@@ -192,7 +192,7 @@ module.exports.newPassword = async function(req, res){
             });
         }else{
             return res.render('forgot_pass', {
-                title: "The URL you clicked has already been used/ is expired. Please enter your email again to generate new URL."
+                title: "Attention! The link has expired/used. Please enter your email again."
             });
         }
     }catch(err){
@@ -209,6 +209,9 @@ module.exports.updatePassword = async function(req, res){
         // Change user password
         // if password and confirmPassword do not match
         if(req.body.password !== req.body.confirmPassword){
+            
+            // *Send noty notification - to ask user to enter pass and confirm pass again
+
             console.log('Password and Confirm Password do not match. Please enter again');
             
             return res.render('forgot_pass', {
@@ -221,7 +224,7 @@ module.exports.updatePassword = async function(req, res){
             user.password = req.body.password;
             user.save();
 
-            // **NOTY can be used here**
+            // *Send noty notification which tells user that the password has been changed
             console.log("password changed successfully!");
         }
         token.isValid = false;  // user won't be able to change password with the same link again (link shared via mail)

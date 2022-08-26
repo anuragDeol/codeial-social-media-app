@@ -1,19 +1,36 @@
 <link rel='stylesheet' href='/css/user_profile.css'>
 
 
-<% if(user.id == profile_user.id) { %>
-    <!-- if user matches with the one signed in, then show the form (to update user's data) -->
-    <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
-        <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
-        <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
-        
-        <input type="file" name="avatar" placeholder="Profile Picture">
+<div id="user-profile-body" class="font-family-bahnschrift">
+
+    <div id="user-profile-container">
         
 
-        <input type="submit" value="Update">
-    </form>
-<% }else { %>
-    <!-- else show only the profile info -->
-    <p><%= profile_user.name %></p>
-    <p><%= profile_user.email %></p>
-<% } %>
+        <div id="form-container">
+            <% if(user.id == profile_user.id) { %>
+                <div id="user-profile-header">
+                    <h2>Hi <%= locals.user.name %> :)</h2>
+                    <h3>You may update your information here</h3>
+                </div>
+                <!-- if user matches with the one signed in, then show the form (to update user's data) -->
+                <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
+                    <br>
+                    <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
+                    <br>
+                    <span>Profile Picture <input type="file" name="avatar" placeholder="Profile Picture"> </span>
+                    
+
+                    <input type="submit" value="Update" id="form-btn">
+                </form>
+            <% }else { %>
+                <!-- else show only the profile info -->
+                <h2><%= profile_user.name %>'s account</h2>
+                <p><b>Name: </b> <%= profile_user.name %></p>
+                <p><b>Email: </b> <%= profile_user.email %></p>
+                <p><b>User since:</b> <%= profile_user.createdAt %></p>
+            <% } %>
+        </div>
+    </div>
+
+</div>

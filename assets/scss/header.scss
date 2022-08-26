@@ -1,4 +1,11 @@
 header {
+    // border: 2px solid black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(117, 134, 169);
+    padding: 0 1%;
     #header-elements {
         width: 250px;
         display: flex;
@@ -17,13 +24,6 @@ header {
         color:black;
         transition: 0.15s;
     }
-    // border: 2px solid black;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(117, 134, 169);
-    padding: 0 1%;
     
     #heading {
         font-family: bahnschrift;
@@ -60,3 +60,4 @@ header {
 .font-family-bahnschrift {
     font-family: bahnschrift;
 }
+

@@ -1,7 +1,11 @@
 <link rel="stylesheet" href="/css/chat_box.css">
+<!-- <a href='#user-chat-box'><i class="fa-solid fa-comment-dots show-chat-box-btn"></i></a> -->
 
 <% if (locals.user){ %>
-	<div id="user-chat-box">
+	<div id="user-chat-box" class="font-family-bahnschrift">
+		<span id="close-chat-box-btn">
+			<a href='#'><i class="fa-solid fa-xmark"></i></a>
+		</span>
 		<p>Chat Box</p>
 		<ul id="chat-messages-list">
 			<li class="other-message">
@@ -15,7 +19,7 @@
 		</ul>
 		<div id="chat-message-input-container">
 			<input id="chat-message-input" placeholder="Type message here">
-			<button id="send-message">Send</button>
+			<button id="send-message" class="font-family-bahnschrift">Send</button>
 		</div>
 
 	</div>

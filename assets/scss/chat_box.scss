@@ -1,13 +1,48 @@
+// #user-chat-box {
+//     position:fixed;
+// 	background-color:grey;
+//     width:0;
+//     height:0;
+//     // top:0;
+//     // left:0;
+// 	   top: 1001px;
+//     left: 940px;
+//     overflow:hidden;
+//     transition:all 2s ease-in-out;
+// }
+
+	// the ONLY CHANGE
+	// top: 1001px;
+    // left: 940px;
+
 #user-chat-box{
+	display: block;
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    border: 1px dashed grey;
+	top: 1001px;
+    left: 940px;
+    border: 3px outset rgb(97, 97, 97);
+	border-bottom: none;
+	border-radius: 10px;
     height: 350px;
 	width: 300px;
 	background: white;
 	padding: 5px;
-	box-shadow: 1px 1px 1px 1px lightgrey;
+	transition: 0.5s;
+	overflow: visible;
+
+	#close-chat-box-btn {
+		position: relative;
+		// bottom: 8%;
+		left: 95%;
+		transition: 0.2s;
+	}
+	#close-chat-box-btn a {
+		color: black;
+	}
+	#close-chat-box-btn:hover a {
+		color: red;
+		transition: 0.2s;
+	}
 
     #chat-messages-list{
     	list-style: none;
@@ -43,13 +78,23 @@
     }
     #chat-message-input-container{
     	    height: 24%;
-		    width: 100%;
+		    // width: 100%;
 		    display: flex;
-		    flex-direction: row;
+		    flex-direction: row;    
+			position: relative;
+    		bottom: 5.2%;
+			width: 104%;
+    		right: 2%;
+			bottom: 9.9%;
 
 		    #chat-message-input{
 	    	    height: 50%;
     			width: 70%;
+				border-radius: 0px 0 0 10px;
+				border: 2px outset rgb(97, 97, 97);
+				border-bottom: 3px outset rgb(97, 97, 97);
+				border-right: none;
+				padding-left: 2%;
 		    }
 
 		    #send-message{
@@ -58,7 +103,126 @@
 			    font-size: 25px;
 			    color: white;
 			    border: none;
-			    background: #58d258;
+			    background: rgb(117,134,169);
+				border-radius: 0 0 10px 0;
+				transition: 0.1s;
+    			border: 3px outset rgb(97, 97, 97);
+				border-right: 1px outset rgb(97, 97, 97);
+				border-left: none;
+				border-top: none;
+				// border-right: none;
 		    }
+			#send-message:hover {
+				background-color: rgb(176, 196, 236);
+				color: black;
+				transition: 0.1s;
+				cursor: pointer;
+			}
+	    }
+}
+
+#user-chat-box:target{
+	display: block;
+    position: fixed;
+	top: 278px;
+	left: 940px;
+    border: 3px outset rgb(97, 97, 97);
+	border-bottom: none;
+	border-radius: 10px;
+    height: 350px;
+	width: 300px;
+	background: white;
+	padding: 5px;
+	transition: 0.5s;
+	overflow: visible;
+
+	#close-chat-box-btn {
+		position: relative;
+		// bottom: 8%;
+		left: 95%;
+		transition: 0.2s;
+	}
+	#close-chat-box-btn a {
+		color: black;
+	}
+	#close-chat-box-btn:hover a {
+		color: red;
+		transition: 0.2s;
+	}
+
+    #chat-messages-list{
+    	list-style: none;
+	    padding: 10px;
+	    height: 70%;
+	    background-color: white;
+	    overflow: auto;
+
+	    .other-message{
+		    text-align: left;
+		    padding: 5px;
+		    span{
+		    	display: inline-block;
+	    		padding: 15px;
+		    	background-color: #ffa0a0;
+		    }
+		    
+	    }
+
+	    .self-message{
+		    text-align: right;
+		    padding: 5px;
+		   
+		    span{
+		    	 
+	    		display: inline-block;
+	    		padding: 15px;
+    			background-color: #a0dcff;
+		    }
+		   
+	    }
+
+    }
+    #chat-message-input-container{
+    	    height: 24%;
+		    // width: 100%;
+		    display: flex;
+		    flex-direction: row;    
+			position: relative;
+    		bottom: 5.2%;
+			width: 104%;
+    		right: 2%;
+			bottom: 9.9%;
+
+		    #chat-message-input{
+	    	    height: 50%;
+    			width: 70%;
+				border-radius: 0px 0 0 10px;
+				border: 2px outset rgb(97, 97, 97);
+				border-bottom: 3px outset rgb(97, 97, 97);
+				border-right: none;
+				padding-left: 2%;
+		    }
+
+		    #send-message{
+	    	    height: 50%;
+			    width: 30%;
+			    font-size: 25px;
+			    color: white;
+			    border: none;
+			    background: rgb(117,134,169);
+				border-radius: 0 0 10px 0;
+				transition: 0.1s;
+    			border: 3px outset rgb(97, 97, 97);
+				border-right: 1px outset rgb(97, 97, 97);
+				border-left: none;
+				border-top: none;
+				// border-right: none;
+		    }
+			#send-message:hover {
+				background-color: rgb(176, 196, 236);
+				color: black;
+				transition: 0.1s;
+				cursor: pointer;
+			}
 	    }
 }

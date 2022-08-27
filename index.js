@@ -1,4 +1,6 @@
 const express = require('express');
+const env = require('./config/environment');
+const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
@@ -22,24 +24,29 @@ const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log('chat server is listening on port 5000');
+const path = require('path');
 
-// set up before server starts
-app.use(sassMiddleware({
-    src: './assets/scss',   // our middleware will pick scss files from here to convert them into css
-    dest: './assets/css',
-    debug: true,
-    outputStyle: 'extended',    // we want our code in multiple lines
-    prefix: '/css'  // where should my server lookout for css files
-}));
+if (env.name == 'development') {
+    // set up before server starts
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),   // our middleware will pick scss files from here to convert them into css
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',    // we want our code in multiple lines
+        prefix: '/css'  // where should my server lookout for css files
+    }));
+}
 
 // app.use(express.urlencoded());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 
 // make the '/uploads' path available to the browser
 app.use('/uploads', express.static(__dirname + '/uploads'));
+
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
@@ -55,7 +62,7 @@ app.set('views', './views');
 app.use(session({
     name: 'codeial',
     //TODO - change the secret before deployment in production mode
-    secret: 'blahsomething',    // 'secret' is the key to encode our user's id and storing encoded 'id' in cookie
+    secret: env.session_cookie_key,    // 'secret' is the key to encode our user's id and storing encoded 'id' in cookie
     saveUninitialized: false,   // if the user has not signed in and the identity has not been initialised in such case i do not want to save any other data
     resave: false,
     cookie: {

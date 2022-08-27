@@ -1,12 +1,13 @@
 const passport = require('passport');
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
+const env = require('./environment');
 
 const User = require('../models/user');
 
 let opts = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),   // header has list of keys(Authorization is one) > Authorization has list of keys(bearer is one) > bearer has the the 'jwt' token
-    secretOrKey: 'codeial'      // 'codeial' is our encryption and decryption key
+    secretOrKey: env.jwt_secret      // 'codeial' is our encryption and decryption key
 }
 
 passport.use(new JWTStrategy(opts, function(jwtPayLoad, done){  // 'jwtPayLoad' contains the payload (which is inside the jwt token), and it contains all the user info

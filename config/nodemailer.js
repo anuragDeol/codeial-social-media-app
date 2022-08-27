@@ -1,19 +1,10 @@
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
+const env = require('./environment');
 
 // tansporter sends emails - it defines how the communication is going to happen
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',     // gmail's server
-    port: 587,
-    secure: false,
-    auth: {
-        // these credentials are used to authorize with google to use their mailer services - so these should be actual, correct and verified by google
-        user: 'anuragdeol2017@gmail.com',
-        pass: 'tfxuokixnzpzpwvy'    // app-generated password, from google, for our app (Codeial)
-    }
-});
+let transporter = nodemailer.createTransport(env.smtp);
 
 
 // we are using ejs as our template engine to be used in mail that we send

@@ -2,12 +2,13 @@ const passport = require('passport');
 const googleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const crypto = require('crypto');   // to generate random unique string - to set as default user password (when signing up)
 const User = require('../models/user');
+const env = require('./environment');
 
 // tell passport to use a new strategy for google login
 passport.use(new googleStrategy({
-    clientID: "278352446158-klp6n4to3bhbqglm7qm3453g5mi8gjmu.apps.googleusercontent.com",
-    clientSecret: "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",
-    callbackURL: "http://localhost:8000/users/auth/google/callback"
+    clientID: env.google_client_id,
+    clientSecret: env.google_client_secret,
+    callbackURL: env.google_callback_url
 }, function(accessToken, refreshToken, profile, done){    // if accessToken expires, refreshToken refreshes it again
         // find a user
         User.findOne({email: profile.emails[0].value}).exec(function(err, user){

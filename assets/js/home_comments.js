@@ -40,21 +40,21 @@ let create = function(postId) {
 
 let newCommentDom = function(comment){
     return $(`<li id="comment-${comment._id}">
-        <p>
-            <small>
-                <a class="delete-comment-button" href="/comments/destroy/${comment._id}"><i class="fa-solid fa-ban"></i></a>
-            </small>
-            ${comment.content}
-            <br>
-            <small>
-                ${comment.user.name}
-            </small>
-
-            <small>
-                <a class="toggle-like-button" data-likes=0 href="/likes/toggle/?id=${comment._id}&type=Comment"> 0 Likes </a>
-            </small>
-        </p>
-    </li>`);
+                <p class="font-family-bahnschrift">
+                    ${comment.content}
+                    <small>
+                        <a class="delete-comment-button" href="/comments/destroy/${comment._id}"><i class="fa-solid fa-ban comment-delete-icon delete-icon"></i></a>
+                    </small>
+                    <br>
+                    <small class="font-family-system-ui font-size-zero-point-7-rem">
+                        ${comment.user.name}
+                    </small>
+                    <br>
+                    <small class="font-size-zero-point-7-rem font-family-sans-serif">
+                        <a class="toggle-like-button" data-likes="${comment.likes.length}" href="/likes/toggle/?id=${comment._id}&type=Comment"> ${comment.likes.length} Likes </a>
+                    </small>
+                </p>
+            </li>`);
 }
 
 

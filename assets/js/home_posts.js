@@ -41,35 +41,39 @@
     // function to convert html into htmlText
     let newPostDom = function(post){
         return $(`<li id="post-${post._id}">
-            <p>
+            <p class="font-family-bahnschrift">
+                <span class="font-size-1-point-2-rem">${post.content}</span>
+
                 <small>
-                    <a class="delete-post-button" href="/posts/destroy/${ post._id }"><i class="fa-solid fa-ban"></i></a>
+                    <a class="delete-post-button" href="/posts/destroy/${post._id}"><i class="fa-solid fa-ban post-delete-icon delete-icon"></i></a>
                 </small>
 
-                ${ post.content }
                 <br>
-                <small>
-                    ${ post.user.name }
+                
+                <small class="font-family-system-ui font-size-zero-point-7-rem">
+                    ${post.user.name}
+                </small>
+
+                <br>
+                
+                <small class="font-size-zero-point-7-rem font-family-sans-serif">
+                    <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post"> ${post.likes.length} Likes </a>
                 </small>
             </p>
-
-            <small>      
-                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
-                    0 Likes
-                </a>
-            </small>
+            <br>
 
             <div class="post-comments">
-                    <form action="/comments/create" method="POST">
-                        <input type="text" name="content" placeholder="Comment here..." required>
-                        <!-- send 'id' of the post on which we want to comment -->
-                        <input type="hidden" name="post" value="${ post._id }">
-                        <input type="submit" value="Comment">
-                    </form>
+                <form action="/comments/create" id="post-${post._id}-comment-form" method="POST">
+                    <input type="text" name="content" placeholder="Comment on ${post.user.name}'s post" class="comment-input-form" required>
+                    <!-- send 'id' of the post on which we want to comment -->
+                    <input type="hidden" name="post" value="${post._id}">
+                    <input type="submit" value="Comment" onclick="create('${post._id}')" class="comment-btn">
+                </form>
 
                 <div class="post-comments-list">
-                    <ul id="post-comments-${ post._id } ">
-                        
+                    <!-- <ul id="post-comments-${post._id}"> -->
+                    <ul>
+
                     </ul>
                 </div>
             </div>

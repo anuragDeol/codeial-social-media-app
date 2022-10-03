@@ -1,0 +1,57 @@
+#user-profile-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 85vh; }
+  #user-profile-body #user-profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 2px solid #d0d0d0;
+    background-color: white;
+    border-radius: 10px; }
+    #user-profile-body #user-profile-container #user-profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
+    #user-profile-body #user-profile-container #form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
+      #user-profile-body #user-profile-container #form-container a {
+        text-decoration: none;
+        color: black;
+        transition: 0.1s; }
+      #user-profile-body #user-profile-container #form-container a:hover {
+        color: #6a95ed;
+        transition: 0.1s; }
+      #user-profile-body #user-profile-container #form-container #forgot-password {
+        margin-bottom: 4%; }
+    #user-profile-body #user-profile-container #form-container form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2%; }
+      #user-profile-body #user-profile-container #form-container form input {
+        margin-top: 2%;
+        margin-bottom: 2%;
+        border: 1px solid #969696;
+        border-radius: 5px;
+        padding: 5%; }
+      #user-profile-body #user-profile-container #form-container form #form-btn {
+        background-color: #7586a9;
+        color: white;
+        border: none;
+        padding: 6%;
+        border-radius: 4px;
+        transition: 0.2s;
+        font-family: bahnschrift; }
+      #user-profile-body #user-profile-container #form-container form #form-btn:hover {
+        background-color: #6a95ed;
+        color: white;
+        cursor: pointer;
+        padding: 6%;
+        border-radius: 4px;
+        transition: 0.2s;
+        font-family: bahnschrift; }

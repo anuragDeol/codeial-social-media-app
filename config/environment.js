@@ -3,6 +3,8 @@ const rfs = require('rotating-file-stream');
 const path = require('path');
 
 const logDirectory = path.join(__dirname, '../production_logs');
+
+// check if production log directory already exist OR we need to create the log directory
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
 // // deprecated method of using rfs

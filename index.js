@@ -1,8 +1,10 @@
+// TODO:: getting following error upon doing 'gulp build' in terminal -> Error [ERR_REQUIRE_ESM]: require() of ES Module C:\Users\HP\Desktop\Career Camp\Web Dev\2. Backend\nodeWS\projects\codeial\node_modules\gulp-imagemin\index.js from C:\Users\HP\Desktop\Career Camp\Web Dev\2. Backend\nodeWS\projects\codeial\gulpfile.js not supported.
 const express = require('express');
 const env = require('./config/environment');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const app = express();
+require('./config/view-helpers')(app);
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');      // require built-in ejs layouts library
 const db = require('./config/mongoose');
@@ -29,7 +31,7 @@ const path = require('path');
 if (env.name == 'development') {
     // set up before server starts
     app.use(sassMiddleware({
-        src: path.join(__dirname, env.asset_path, 'scss'),   // our middleware will pick scss files from here to convert them into css
+        src: path.join(__dirname, env.asset_path, 'scss'),   // middleware will pick scss files from here to convert them into css
         dest: path.join(__dirname, env.asset_path, 'css'),
         debug: true,
         outputStyle: 'extended',    // we want our code in multiple lines

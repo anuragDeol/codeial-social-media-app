@@ -1,5 +1,6 @@
 // gulp-cli (cli is command line interface)
 // gulp is used to BUILD PROJECT - i.e. minification/optimising assets
+// tip: gulp executes tasks given to it
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));     // *new SYNTAX
 const cssnano = require('gulp-cssnano');    // converts css code into single lined code
@@ -7,10 +8,7 @@ const rev = require('gulp-rev');
 const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');  // -v7.1.0 installed, because latest version (i.e 8.0.0) does not support require() of ES module
 const del = require('del');     // -v6.1.1 installed, because latest version (i.e 7.0.0) doesn't support require() of ES module
-// const fs = require('fs');
 
-
-// gulp executes tasks given to it
 // Task::minify css
 gulp.task('css', function(done) {
     console.log('minifying css...');
@@ -68,10 +66,8 @@ gulp.task('clean:assets', async function(done) {
     done();
 });
 
-// Task::executing all the tasks
-gulp.task('build', gulp.series('clean:assets', 'css', 'js', 'image'), function(done) {
-// gulp.task('build', gulp.series('clean:assets', 'css', 'image'), function(done) {
-// gulp.task('build', gulp.series('css', 'js'), function(done) {
+// Task::executing all the tasks - building the project
+gulp.task('build', gulp.series('clean:assets', 'css', 'js'), function(done) {
     console.log('Building assets...');
     done();
 });

@@ -1,9 +1,8 @@
 #user-chat-box {
-  display: none;
   display: block;
   position: fixed;
-  top: 1001px;
-  left: 940px;
+  bottom: -60%;
+  right: 2%;
   border: 3px outset #616161;
   border-bottom: none;
   border-radius: 10px;
@@ -36,16 +35,14 @@
       #user-chat-box #chat-messages-list .other-message span {
         display: inline-block;
         padding: 15px;
-        background-color: #ffa0a0;
-        border-radius: 20px; }
+        background-color: #ffa0a0; }
     #user-chat-box #chat-messages-list .self-message {
       text-align: right;
       padding: 5px; }
       #user-chat-box #chat-messages-list .self-message span {
         display: inline-block;
         padding: 15px;
-        background-color: #a0dcff;
-        border-radius: 20px; }
+        background-color: #a0dcff; }
   #user-chat-box #chat-message-input-container {
     height: 24%;
     display: flex;
@@ -85,8 +82,8 @@
 #user-chat-box:target {
   display: block;
   position: fixed;
-  top: 278px;
-  left: 940px;
+  bottom: 1%;
+  right: 2%;
   border: 3px outset #616161;
   border-bottom: none;
   border-radius: 10px;

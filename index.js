@@ -1,4 +1,3 @@
-// TODO:: getting following error upon doing 'gulp build' in terminal -> Error [ERR_REQUIRE_ESM]: require() of ES Module C:\Users\HP\Desktop\Career Camp\Web Dev\2. Backend\nodeWS\projects\codeial\node_modules\gulp-imagemin\index.js from C:\Users\HP\Desktop\Career Camp\Web Dev\2. Backend\nodeWS\projects\codeial\gulpfile.js not supported.
 const express = require('express');
 const env = require('./config/environment');
 const logger = require('morgan');

@@ -2,11 +2,12 @@
 
 module.exports.chatSockets = function(socketServer){
    // let io = require('socket.io')(socketServer);
-    let io = require('socket.io')(socketServer, {
-        cors: {
-            origin:'http://localhost:8000',
-            methods: ['GET','POST']
-        }
+    let io = require("socket.io")(socketServer, {
+      cors: {
+        // origin:'http://localhost:8000',      // localhost
+        origin: "http://43.204.32.160/:8000",   // public ip
+        methods: ["GET", "POST"],
+      },
     });
 
     io.on('connection', function(socket){

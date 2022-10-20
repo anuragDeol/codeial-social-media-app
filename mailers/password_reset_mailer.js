@@ -10,7 +10,7 @@ exports.resetPass = (token) => {
 
     nodeMailer.transporter.sendMail({
         // from: 'codeial@gmail.com',   // the mail is sent from the email which is used to setup mailer in 'nodemailer.js' and is authorized by google
-        to: token.user.email,     // receiver's (the user who commented) email id
+        to: token.user.email,     // receiver's email id
         subject: "Codeial - Change your password",
         html: htmlString
     }, (err, info) => {
